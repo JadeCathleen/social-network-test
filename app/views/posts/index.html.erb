@@ -11,7 +11,16 @@
         <p class="card-text"><%= post.content %></p>
         <div class="emoji-buttons">
           <div class="btn emoji-btn">
-
+            😄 <%= post.emojis.count %>
+          </div>
+          <div class="btn emoji-btn">
+            😭 <%= post.emojis.count %>
+          </div>
+          <div class="btn emoji-btn">
+            👍 <%= post.emojis.count %>
+          </div>
+          <div class="btn emoji-btn">
+            👎 <%= post.emojis.count %>
           </div>
         </div>
       </div>
