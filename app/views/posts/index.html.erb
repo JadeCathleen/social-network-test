@@ -1,0 +1,23 @@
+<%= simple_form_for([current_user, @post]) do |f| %>
+  <%= f.input :title %>
+  <%= f.input :content %>
+  <%= f.input :photo, as: :file %>
+  <%= f.submit %>
+<% end %>
+
+<div class="container">
+  <div class="row">
+  <% @posts.each do |post| %>
+  <div class="card col-sm-12 col-md-6 col-lg-4">
+    <div class="post">
+      <div class="card-img-top" style="background-image: url(<%= url_for(post.photo) %>)">
+        <h5 class="card-title"><%= post.title %></h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text"><%= post.content %></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  </div>
+</div>
