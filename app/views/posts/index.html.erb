@@ -1,12 +1,6 @@
-<%= simple_form_for([current_user, @post]) do |f| %>
-  <%= f.input :title %>
-  <%= f.input :content %>
-  <%= f.input :photo, as: :file %>
-  <%= f.submit %>
-<% end %>
 
 <div class="container">
-  <div class="row">
+  <div class="row my-5">
   <% @posts.each do |post| %>
   <div class="card col-sm-12 col-md-6 col-lg-4">
     <div class="post">
@@ -15,9 +9,24 @@
       </div>
       <div class="card-body">
         <p class="card-text"><%= post.content %></p>
+        <div class="emoji-buttons">
+          <div class="btn emoji-btn">
+
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <% end %>
   </div>
+</div>
+
+<h4 class="text-center">Do you want to add your own post ?</h4>
+<div class="card w-25 p-4 my-4 mx-auto">
+  <%= simple_form_for([current_user, @post]) do |f| %>
+    <%= f.input :title %>
+    <%= f.input :content %>
+    <%= f.input :photo, as: :file %>
+    <%= f.submit "Save", class:"btn btn-primary" %>
+  <% end %>
 </div>
