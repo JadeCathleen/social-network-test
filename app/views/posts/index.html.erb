@@ -10,18 +10,18 @@
       <div class="card-body">
         <p class="card-text"><%= post.content %></p>
         <div class="emoji-buttons">
-          <div class="btn emoji-btn">
+          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#smiley", post_id: post.id, user_id: current_user.id} %>
             😄 <%= post.emojis.count %>
-          </div>
-          <div class="btn emoji-btn">
+          <%= end %>
+          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#sad", post_id: post.id, user_id: current_user.id} %>
             😭 <%= post.emojis.count %>
-          </div>
-          <div class="btn emoji-btn">
+          <%= end %>
+          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#like", post_id: post.id, user_id: current_user.id} %>
             👍 <%= post.emojis.count %>
-          </div>
-          <div class="btn emoji-btn">
+          <%= end %>
+          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#unlike", post_id: post.id, user_id: current_user.id} %>
             👎 <%= post.emojis.count %>
-          </div>
+          <%= end %>
         </div>
       </div>
     </div>
