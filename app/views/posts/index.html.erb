@@ -10,18 +10,20 @@
       <div class="card-body">
         <p class="card-text"><%= post.content %></p>
         <div class="emoji-buttons">
+        <!--
           <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#smiley", post_id: post.id, user_id: current_user.id} %>
-            😄 <%= post.emojis.count %>
+            😄 <%= post.emojis.where(name: "😄").count %>
           <%= end %>
           <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#sad", post_id: post.id, user_id: current_user.id} %>
-            😭 <%= post.emojis.count %>
+            😭 <%= post.emojis.where(name: "😭").count %>
           <%= end %>
           <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#like", post_id: post.id, user_id: current_user.id} %>
-            👍 <%= post.emojis.count %>
+            👍 <%= post.emojis.where(name: "👍").count %>
           <%= end %>
           <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#unlike", post_id: post.id, user_id: current_user.id} %>
-            👎 <%= post.emojis.count %>
+            👎 <%= post.emojis.where(name: "👎").count %>
           <%= end %>
+          -->
         </div>
       </div>
     </div>
