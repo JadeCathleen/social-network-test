@@ -10,16 +10,24 @@
       <div class="card-body">
         <p class="card-text"><%= post.content %></p>
         <div class="emoji-buttons">
-          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#smiley", post_id: post.id, user_id: current_user.id} do %>
+          <%= link_to "#",
+            class:"btn emoji-btn #{bg_status(Emoji.where(emoji: "smiley", user_id: current_user.id, post_id: post.id).first)}",
+            data: {reflex: "click->EmojisReflex#smiley", post_id: post.id, user_id: current_user.id} do %>
             😄 <%= tag.span post.emojis.where(emoji: "smiley").count, id: "post-#{post.id}-smileys" %>
           <% end %>
-          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#sad", post_id: post.id, user_id: current_user.id} do %>
+          <%= link_to "#",
+            class:"btn emoji-btn #{bg_status(Emoji.where(emoji: "sad", user_id: current_user.id, post_id: post.id).first)}",
+            data: {reflex: "click->EmojisReflex#sad", post_id: post.id, user_id: current_user.id} do %>
             😭 <%= tag.span post.emojis.where(emoji: "sad").count, id: "post-#{post.id}-sads" %>
           <% end %>
-          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#like", post_id: post.id, user_id: current_user.id} do %>
+          <%= link_to "#",
+            class:"btn emoji-btn #{bg_status(Emoji.where(emoji: "like", user_id: current_user.id, post_id: post.id).first)}",
+            data: {reflex: "click->EmojisReflex#like", post_id: post.id, user_id: current_user.id} do %>
             👍 <%= tag.span post.emojis.where(emoji: "like").count, id: "post-#{post.id}-likes" %>
           <% end %>
-          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#dislike", post_id: post.id, user_id: current_user.id} do %>
+          <%= link_to "#",
+            class:"btn emoji-btn #{bg_status(Emoji.where(emoji: "dislike", user_id: current_user.id, post_id: post.id).first)}",
+            data: {reflex: "click->EmojisReflex#dislike", post_id: post.id, user_id: current_user.id} do %>
             👎 <%= tag.span post.emojis.where(emoji: "dislike").count, id: "post-#{post.id}-dislikes" %>
           <% end %>
         </div>

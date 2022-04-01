@@ -1,0 +1,27 @@
+.emoji-btn {
+  // position: absolute;
+
+  width: 69px;
+  height: 38px;
+
+  // left: 20px;
+  // bottom: 20px;
+  background-color: #FFFFFF;
+  border: 2px solid #4536F4;
+  box-sizing: border-box;
+  border-radius: 86px;
+}
+.emoji-btn:hover {
+  background-color: #4536F4;
+  color: white;
+}
+
+.white {
+  background-color: $white;
+  color: black;
+}
+
+.purple {
+  background-color: $purple;
+  color: white;
+}
