@@ -3,15 +3,15 @@
 class EmojisReflex < ApplicationReflex
 
   def smiley
-    post = Post.find(element.dataset[:post_id])
-    user = User.find(element.dataset[:user_id])
-    chosen_emoji = Emoji.where(emoji: "smiley", user: user, post: post).first
-    chosen_emoji.nil? ? Emoji.create(emoji: "smiley", post: post, user: user) : Emoji.destroy(chosen_emoji.id)
+    post = Post.find(element.dataset[:post_id]) # set the post from sending info post_id
+    user = User.find(element.dataset[:user_id]) # set the user from sending info post_id
+    chosen_emoji = Emoji.where(emoji: "smiley", user: user, post: post).first # find the instance of emoji which matches emoji, user and post
+    chosen_emoji.nil? ? Emoji.create(emoji: "smiley", post: post, user: user) : Emoji.destroy(chosen_emoji.id) # if the emoji does not exist, create it, else destroy it
     cable_ready["timeline"].text_content(
       selector: "#post-#{post.id}-smileys",
       text: post.emojis.where(emoji: "smiley").count
-    )
-    cable_ready.broadcast
+    ) # update the text inside button that counts the total number of emojis
+    cable_ready.broadcast # broadcast this number immediately
   end
 
   def sad
