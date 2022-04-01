@@ -5,11 +5,11 @@ class EmojisReflex < ApplicationReflex
   def smiley
     post = Post.find(element.dataset[:post_id])
     user = User.find(element.dataset[:user_id])
-    chosen_emoji = Emoji.where(emoji: "smiley", user: user, post: post)
-    if chosen_emoji == []
+    chosen_emoji = Emoji.where(emoji: "smiley", user: user, post: post).first
+    if chosen_emoji.nil?
       Emoji.create(emoji: "smiley", post: post, user: user)
     else
-      Emoji.destroy(chosen_emoji.first.id)
+      Emoji.destroy(chosen_emoji.id)
     end
     cable_ready["timeline"].text_content(
       selector: "#post-#{post.id}-smileys",
@@ -21,7 +21,7 @@ class EmojisReflex < ApplicationReflex
   def sad
     post = Post.find(element.dataset[:post_id])
     user = User.find(element.dataset[:user_id])
-    chosen_emoji = Emoji.where(emoji: "sad", user: user, post: post)
+    chosen_emoji = Emoji.where(emoji: "sad", user: user, post: post).first
     if chosen_emoji.nil?
       Emoji.create(emoji: "sad", post: post, user: user)
     else
@@ -29,7 +29,7 @@ class EmojisReflex < ApplicationReflex
     end
     cable_ready["timeline"].text_content(
       selector: "#post-#{post.id}-sads",
-      text: post.where(emoji: "sad").count
+      text: post.emojis.where(emoji: "sad").count
     )
     cable_ready.broadcast
   end
@@ -37,7 +37,7 @@ class EmojisReflex < ApplicationReflex
   def like
     post = Post.find(element.dataset[:post_id])
     user = User.find(element.dataset[:user_id])
-    chosen_emoji = Emoji.where(emoji: "like", user: user, post: post)
+    chosen_emoji = Emoji.where(emoji: "like", user: user, post: post).first
     if chosen_emoji.nil?
       Emoji.create(emoji: "like", post: post, user: user)
     else
@@ -45,7 +45,7 @@ class EmojisReflex < ApplicationReflex
     end
     cable_ready["timeline"].text_content(
       selector: "#post-#{post.id}-likes",
-      text: post.where(emoji: "like").count
+      text: post.emojis.where(emoji: "like").count
     )
     cable_ready.broadcast
   end
@@ -53,7 +53,7 @@ class EmojisReflex < ApplicationReflex
   def dislike
     post = Post.find(element.dataset[:post_id])
     user = User.find(element.dataset[:user_id])
-    chosen_emoji = Emoji.where(emoji: "dislike", user: user, post: post)
+    chosen_emoji = Emoji.where(emoji: "dislike", user: user, post: post).first
     if chosen_emoji.nil?
       Emoji.create(emoji: "dislike", post: post, user: user)
     else
@@ -61,7 +61,7 @@ class EmojisReflex < ApplicationReflex
     end
     cable_ready["timeline"].text_content(
       selector: "#post-#{post.id}-dislikes",
-      text: post.where(emoji: "dislike").count
+      text: post.emojis.where(emoji: "dislike").count
     )
     cable_ready.broadcast
   end
