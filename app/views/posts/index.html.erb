@@ -10,20 +10,18 @@
       <div class="card-body">
         <p class="card-text"><%= post.content %></p>
         <div class="emoji-buttons">
-        <!--
-          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#smiley", post_id: post.id, user_id: current_user.id} %>
-            😄 <%= post.emojis.where(name: "😄").count %>
-          <%= end %>
-          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#sad", post_id: post.id, user_id: current_user.id} %>
-            😭 <%= post.emojis.where(name: "😭").count %>
-          <%= end %>
-          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#like", post_id: post.id, user_id: current_user.id} %>
-            👍 <%= post.emojis.where(name: "👍").count %>
-          <%= end %>
-          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#unlike", post_id: post.id, user_id: current_user.id} %>
-            👎 <%= post.emojis.where(name: "👎").count %>
-          <%= end %>
-          -->
+          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#smiley", post_id: post.id, user_id: current_user.id} do %>
+            😄 <%= post.emojis.where(emoji: "smiley").count %>
+          <% end %>
+          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#sad", post_id: post.id, user_id: current_user.id} do %>
+            😭 <%= post.emojis.where(emoji: "sad").count %>
+          <% end %>
+          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#like", post_id: post.id, user_id: current_user.id} do %>
+            👍 <%= post.emojis.where(emoji: "like").count %>
+          <% end %>
+          <%= link_to "#", class:"btn emoji-btn", data: {reflex: "click->EmojisReflex#dislike", post_id: post.id, user_id: current_user.id} do %>
+            👎 <%= post.emojis.where(emoji: "dislike").count %>
+          <% end %>
         </div>
       </div>
     </div>
