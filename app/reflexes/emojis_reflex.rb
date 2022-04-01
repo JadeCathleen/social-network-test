@@ -6,13 +6,16 @@ class EmojisReflex < ApplicationReflex
     post = Post.find(element.dataset[:post_id])
     user = User.find(element.dataset[:user_id])
     chosen_emoji = Emoji.where(emoji: "smiley", user: user, post: post)
-    if chosen_emoji.nil?
+    if chosen_emoji == []
       Emoji.create(emoji: "smiley", post: post, user: user)
-      redirect_to root_path
     else
-      Emoji.destroy(chosen_emoji.id)
-      redirect_to root_path
+      Emoji.destroy(chosen_emoji.first.id)
     end
+    cable_ready["timeline"].text_content(
+      selector: "#post-#{post.id}-smileys",
+      text: post.emojis.where(emoji: "smiley").count
+    )
+    cable_ready.broadcast
   end
 
   def sad
@@ -21,11 +24,14 @@ class EmojisReflex < ApplicationReflex
     chosen_emoji = Emoji.where(emoji: "sad", user: user, post: post)
     if chosen_emoji.nil?
       Emoji.create(emoji: "sad", post: post, user: user)
-      redirect_to root_path
     else
       Emoji.destroy(chosen_emoji.id)
-      redirect_to root_path
     end
+    cable_ready["timeline"].text_content(
+      selector: "#post-#{post.id}-sads",
+      text: post.where(emoji: "sad").count
+    )
+    cable_ready.broadcast
   end
 
   def like
@@ -34,11 +40,14 @@ class EmojisReflex < ApplicationReflex
     chosen_emoji = Emoji.where(emoji: "like", user: user, post: post)
     if chosen_emoji.nil?
       Emoji.create(emoji: "like", post: post, user: user)
-      redirect_to root_path
     else
       Emoji.destroy(chosen_emoji.id)
-      redirect_to root_path
     end
+    cable_ready["timeline"].text_content(
+      selector: "#post-#{post.id}-likes",
+      text: post.where(emoji: "like").count
+    )
+    cable_ready.broadcast
   end
 
   def dislike
@@ -47,10 +56,13 @@ class EmojisReflex < ApplicationReflex
     chosen_emoji = Emoji.where(emoji: "dislike", user: user, post: post)
     if chosen_emoji.nil?
       Emoji.create(emoji: "dislike", post: post, user: user)
-      redirect_to root_path
     else
       Emoji.destroy(chosen_emoji.id)
-      redirect_to root_path
     end
+    cable_ready["timeline"].text_content(
+      selector: "#post-#{post.id}-dislikes",
+      text: post.where(emoji: "dislike").count
+    )
+    cable_ready.broadcast
   end
 end
